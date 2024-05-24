@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://jubad:jubad@postgres:5432/jubad
+      REDIS_HOST: redis
+
+    ports:
+      - '3001:3000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - redis
+      - postgres
+    restart: on-failure
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: jubad
+      POSTGRES_PASSWORD: jubad
+      POSTGRES_DB: jubad
+    volumes:
+      - .pg-data:/var/lib/postgresql/data
+    depends_on:
+      - redis
+    ports:
+      - 5431:5432
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - .redis-data:/data
