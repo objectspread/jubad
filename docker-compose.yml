@@ -3,11 +3,13 @@ services:
   app:
     build:
       dockerfile: Dockerfile
+      args:
+        - RAILS_ENV=development
       context: .
     env_file: .env
     environment:
       DATABASE_URL: postgres://jubad:jubad@postgres:5432/jubad
-      REDIS_HOST: redis
+      REDIS_URL: localhost://redis:6379
 
     ports:
       - '3001:3000'
