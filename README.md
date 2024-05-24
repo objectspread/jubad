@@ -1,7 +1,6 @@
 
-# Jubad
 <p align="center">
-<img align="center" width="300" alt="logo" src="https://github.com/objectspread/jubad/blob/main/logo.png">
+<img align="center" width="150" alt="logo" src="https://github.com/objectspread/jubad/blob/main/logo.png">
 </p>
 
 <div align=center>
